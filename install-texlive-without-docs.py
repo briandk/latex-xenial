@@ -22,7 +22,8 @@ dependencies = [extract_dependency(line, dependency_pattern)
 arguments = [
     "apt-get",
     "install",
-    "--assume-yes"
+    "--assume-yes",
+    "--no-install-recommends"
 ]
 
 arguments.extend(dependencies)
