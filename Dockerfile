@@ -21,3 +21,13 @@ RUN dpkg-reconfigure locales && \
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
+
+# Install pandoc
+RUN apt-get update && apt-get install --assume-yes wget
+ENV PANDOC_URL https://github.com/jgm/pandoc/releases/download/1.17.1/pandoc-1.17.1-2-amd64.deb
+RUN wget $PANDOC_URL --output-document /tmp/pandoc-package.deb
+RUN dpkg --install /tmp/pandoc-package.deb
+
+# Test pandoc
+RUN echo "# \`pandoc\` should work *successfully!*" > /tmp/test.md
+RUN pandoc -t html /tmp/test.md
